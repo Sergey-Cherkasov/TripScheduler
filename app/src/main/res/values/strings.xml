@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Trip scheduler</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="find_tickets">Find tickets</string>
+    <string name="yyyy_mm">yyyy-mm</string>
+    <string name="airline_logo">Airline logo</string>
+</resources>

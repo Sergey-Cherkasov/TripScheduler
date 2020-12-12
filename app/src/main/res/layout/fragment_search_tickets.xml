@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/from_to_destination"
+        layout="@layout/element_from_to_destination" />
+
+    <include
+        android:id="@+id/from_to_dates"
+        layout="@layout/element_from_to_dates" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_find_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/primaryButton"
+        android:text="@string/find_tickets"
+        app:cornerRadius="4dp" />
+
+</LinearLayout>
