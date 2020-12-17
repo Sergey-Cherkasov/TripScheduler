@@ -1,11 +1,13 @@
 package br.svcdev.tripscheduler.presenter
 
-import br.svcdev.tripscheduler.common.ILogger
 import br.svcdev.tripscheduler.common.Logger
+import br.svcdev.tripscheduler.common.interfaces.ILogger
 import br.svcdev.tripscheduler.model.entity.cityairport.IataCode
-import br.svcdev.tripscheduler.model.repository.remote.iatacodes.IIataCodesRepository
+import br.svcdev.tripscheduler.model.interfaces.IIataCodesRepository
+import br.svcdev.tripscheduler.presenter.interfaces.IAutoCompletePresenter
+import br.svcdev.tripscheduler.presenter.interfaces.ISearchTicketsPresenter
 import br.svcdev.tripscheduler.view.Screens
-import br.svcdev.tripscheduler.view.fragment.searchtickets.ISearchTicketsView
+import br.svcdev.tripscheduler.view.interfaces.ISearchTicketsView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -31,10 +33,6 @@ class SearchTicketsPresenter : MvpPresenter<ISearchTicketsView>(), ISearchTicket
             router.navigateTo(Screens.ListTicketsScreen(origin, destination, departAt))
         }
 
-    override var textChangeListener: (String) -> Unit = {
-        logger.logi("TRIP_SCHEDULER", "Text changed: $it")
-    }
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
@@ -43,6 +41,11 @@ class SearchTicketsPresenter : MvpPresenter<ISearchTicketsView>(), ISearchTicket
     override fun onBackPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.release()
     }
 
     inner class AutoCompletePresenter : IAutoCompletePresenter {

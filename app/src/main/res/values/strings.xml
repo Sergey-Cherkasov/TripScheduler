@@ -3,6 +3,8 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="find_tickets">Find tickets</string>
-    <string name="yyyy_mm">yyyy-mm</string>
+    <string name="depart_at">Depart date: yyyy-mm</string>
+    <string name="return_at">Return date: yyyy-mm</string>
     <string name="airline_logo">Airline logo</string>
+    <string name="add_return_date">Add return date</string>
 </resources>

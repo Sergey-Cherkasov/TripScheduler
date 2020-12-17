@@ -1,8 +1,14 @@
 package br.svcdev.tripscheduler.common
 
 import android.util.Log
+import br.svcdev.tripscheduler.common.interfaces.ILogger
 
 class Logger : ILogger {
+
+    companion object {
+        const val TAG = "TRIP_SCHEDULER"
+    }
+
     override fun logd(tag: String?, message: String) {
         Log.d(tag, message)
     }

@@ -10,8 +10,9 @@ import android.widget.TextView
 import br.svcdev.tripscheduler.R
 import br.svcdev.tripscheduler.common.Logger
 import br.svcdev.tripscheduler.model.entity.cityairport.IataCode
-import br.svcdev.tripscheduler.presenter.IAutoCompletePresenter
-import br.svcdev.tripscheduler.view.fragment.searchtickets.SearchTicketsFragment
+import br.svcdev.tripscheduler.presenter.interfaces.IAutoCompletePresenter
+import br.svcdev.tripscheduler.view.fragment.SearchTicketsFragment
+import java.util.*
 
 class CityAirportAutoCompleteAdapter(
     private val context: SearchTicketsFragment,
@@ -42,6 +43,7 @@ class CityAirportAutoCompleteAdapter(
         view?.let {
             val iataCode: IataCode = getItem(position)
             (it.findViewById(R.id.tv_city_airport_name) as TextView).text = iataCode.name
+            (it.findViewById(R.id.tv_city_airport_iata) as TextView).text = iataCode.code
         }
         return view!!
     }
@@ -54,7 +56,7 @@ class CityAirportAutoCompleteAdapter(
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             constraint?.let {
                 suggestions.clear()
-                suggestions.addAll(presenter.getIataCodes(it.toString()))
+                suggestions.addAll(presenter.getIataCodes(it.toString().capitalize(Locale.ROOT)))
                 val filterResults = FilterResults()
                 filterResults.values = suggestions
                 filterResults.count = suggestions.size

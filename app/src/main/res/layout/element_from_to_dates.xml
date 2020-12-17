@@ -16,53 +16,90 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_today"
-            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+            app:layout_constraintBottom_toTopOf="@id/guideline_h"
             app:layout_constraintEnd_toStartOf="@id/guideline_v_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_depart_at"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/red"
+            app:layout_constraintBottom_toTopOf="@id/guideline_h"
+            app:layout_constraintEnd_toStartOf="@id/guideline_v_4"
+            app:layout_constraintStart_toEndOf="@id/guideline_v_3"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/et_depart_at"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/depart_at"
+                android:inputType="date"
+                android:textSize="16sp"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_return_at"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:text="@string/add_return_date"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_h_1"
+            app:layout_constraintEnd_toStartOf="@id/guideline_v_4"
+            app:layout_constraintStart_toStartOf="@id/guideline_v_3"
+            app:layout_constraintTop_toBottomOf="@id/guideline_h" />
+
         <ImageView
+            android:id="@+id/iv_return_at"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_event"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_v_3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/guideline_h" />
 
-        <EditText
-            android:id="@+id/et_depart_at"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_return_at"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:hint="@string/yyyy_mm"
-            android:paddingStart="8dp"
-            android:paddingTop="16dp"
+            android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            android:paddingBottom="16dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
-            app:layout_constraintEnd_toStartOf="@id/guideline_v_4"
-            app:layout_constraintStart_toEndOf="@id/guideline_v_3"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="LabelFor" />
-
-        <EditText
-            android:id="@+id/et_return_at"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:hint="@string/yyyy_mm"
-            android:paddingStart="8dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="4dp"
-            android:paddingBottom="16dp"
-            android:textSize="16sp"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_v_4"
             app:layout_constraintStart_toEndOf="@id/guideline_v_3"
-            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
-            tools:ignore="LabelFor" />
+            app:layout_constraintTop_toBottomOf="@id/guideline_h">
+
+            <EditText
+                android:id="@+id/et_return_at"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/return_at"
+                android:inputType="date"
+                android:textSize="16sp"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_return_at_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline_v_4"
+            app:layout_constraintTop_toBottomOf="@id/guideline_h" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_v_3"
@@ -79,11 +116,18 @@
             app:layout_constraintGuide_end="64dp" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_horizontal"
+            android:id="@+id/guideline_h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_h_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

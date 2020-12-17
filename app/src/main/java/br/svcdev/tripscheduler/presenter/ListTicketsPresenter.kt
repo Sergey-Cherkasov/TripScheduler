@@ -2,9 +2,12 @@ package br.svcdev.tripscheduler.presenter
 
 import br.svcdev.tripscheduler.common.Logger
 import br.svcdev.tripscheduler.model.entity.Data
-import br.svcdev.tripscheduler.model.repository.remote.ITicketsAnyDayMonthRepository
-import br.svcdev.tripscheduler.view.fragment.listtickets.IListTicketsItemView
-import br.svcdev.tripscheduler.view.fragment.listtickets.IListTicketsView
+import br.svcdev.tripscheduler.model.interfaces.ITicketsAnyDayMonthRepository
+import br.svcdev.tripscheduler.presenter.interfaces.IListTicketsPresenter
+import br.svcdev.tripscheduler.presenter.interfaces.ITicketsPresenter
+import br.svcdev.tripscheduler.view.Screens
+import br.svcdev.tripscheduler.view.interfaces.IListTicketsItemView
+import br.svcdev.tripscheduler.view.interfaces.IListTicketsView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -35,6 +38,11 @@ class ListTicketsPresenter(
         viewState.init()
         loadData()
         ticketsPresenter.itemLongClickListener = null
+        ticketsPresenter.itemClickListener = { itemView ->
+            val ticket: Data? =
+                ticketsPresenter.listTickets[ticketsPresenter.keys.elementAt(itemView.pos)]
+            router.navigateTo(Screens.TicketDetailsScreen(ticket!!))
+        }
     }
 
     private fun loadData() {
@@ -57,8 +65,14 @@ class ListTicketsPresenter(
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.release()
+    }
+
     inner class TicketsPresenter : ITicketsPresenter {
         val listTickets = mutableMapOf<String, Data>()
+        val keys = listTickets.keys
 
         override var itemClickListener: ((IListTicketsItemView) -> Unit)? = null
 
@@ -66,14 +80,12 @@ class ListTicketsPresenter(
 
         override fun bindView(view: IListTicketsItemView) {
             val mapKeys = listTickets.keys
-            val ticketAnyDayMonth = listTickets[mapKeys.elementAt(view.pos)]
-            mapKeys.elementAt(view.pos).let { view.setDate(it) }
+            val ticketAnyDayMonth = listTickets[keys.elementAt(view.pos)]
+            keys.elementAt(view.pos).let { view.setDate(it) }
             ticketAnyDayMonth?.price.let { view.setPrice(it!!) }
             ticketAnyDayMonth?.airline.let { airlineName ->
-                view.setAirlineName(airlineName!!)
                 view.setAirlineLogo(airlineName)
             }
-            ticketAnyDayMonth?.flightNumber.let { view.setFlightNumber(it!!) }
         }
 
         override fun getCount(): Int = listTickets.size

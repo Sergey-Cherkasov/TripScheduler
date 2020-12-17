@@ -3,8 +3,9 @@ package br.svcdev.tripscheduler.view.activity
 import android.os.Bundle
 import br.svcdev.tripscheduler.App
 import br.svcdev.tripscheduler.R
-import br.svcdev.tripscheduler.common.IBackPressedListener
+import br.svcdev.tripscheduler.common.interfaces.IBackPressedListener
 import br.svcdev.tripscheduler.presenter.MainPresenter
+import br.svcdev.tripscheduler.view.interfaces.IMainView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.terrakok.cicerone.NavigatorHolder

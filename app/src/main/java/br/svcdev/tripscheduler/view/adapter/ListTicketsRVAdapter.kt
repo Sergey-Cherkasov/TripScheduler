@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.svcdev.tripscheduler.R
-import br.svcdev.tripscheduler.common.IImageLoader
-import br.svcdev.tripscheduler.presenter.ITicketsPresenter
-import br.svcdev.tripscheduler.view.fragment.listtickets.IListTicketsItemView
+import br.svcdev.tripscheduler.common.interfaces.IImageLoader
+import br.svcdev.tripscheduler.presenter.interfaces.ITicketsPresenter
+import br.svcdev.tripscheduler.view.interfaces.IListTicketsItemView
 
 class ListTicketsRVAdapter(
     val presenter: ITicketsPresenter,
@@ -20,29 +20,28 @@ class ListTicketsRVAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         IListTicketsItemView {
 
+        private val LENGHT = 175
+        private val WIDTH = 50
+        private val currency = "RUB"
+
         private val ivAirlineLogo: ImageView = itemView.findViewById(R.id.iv_airline_logo)
-        private val tvAirline: TextView = itemView.findViewById(R.id.tv_airline)
         private val tvDate: TextView = itemView.findViewById(R.id.tv_date)
-        private val tvFlightNumber: TextView = itemView.findViewById(R.id.tv_flight_number)
         private val tvPrice: TextView = itemView.findViewById(R.id.tv_price)
 
-        override fun setAirlineLogo(airline: String?) = imageLoader.loadLogo(airline, ivAirlineLogo)
-
-        override fun setAirlineName(airline: String) {
-            tvAirline.text = airline
-        }
+        override fun setAirlineLogo(airline: String?) = imageLoader.loadLogo(
+            airline, ivAirlineLogo,
+            LENGHT, WIDTH
+        )
 
         override fun setDate(date: String) {
-            tvDate.text = date
-        }
-
-        override fun setFlightNumber(number: Int) {
-            tvFlightNumber.text = number.toString()
+            tvDate.text = String.format("Date: $date")
         }
 
         override fun setPrice(price: Int) {
-            tvPrice.text = price.toString()
+            tvPrice.text = String.format("Price: $price $currency")
         }
+
+        override fun getDate(): String = tvDate.text.toString()
 
         override var pos = -1
     }

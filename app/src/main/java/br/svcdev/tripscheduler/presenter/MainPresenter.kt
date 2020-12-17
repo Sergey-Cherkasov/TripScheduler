@@ -1,7 +1,7 @@
 package br.svcdev.tripscheduler.presenter
 
 import br.svcdev.tripscheduler.view.Screens
-import br.svcdev.tripscheduler.view.activity.IMainView
+import br.svcdev.tripscheduler.view.interfaces.IMainView
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject

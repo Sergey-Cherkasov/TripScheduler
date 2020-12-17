@@ -1,7 +1,10 @@
 package br.svcdev.tripscheduler.di.module
 
-import br.svcdev.tripscheduler.model.api.IAutoCompleteSource
-import br.svcdev.tripscheduler.model.api.IDataSource
+import br.svcdev.tripscheduler.App
+import br.svcdev.tripscheduler.common.NetworkStatus
+import br.svcdev.tripscheduler.common.interfaces.INetworkStatus
+import br.svcdev.tripscheduler.model.interfaces.api.IAutoCompleteSource
+import br.svcdev.tripscheduler.model.interfaces.api.IDataSource
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -48,4 +51,7 @@ class ApiModule {
         .excludeFieldsWithoutExposeAnnotation()
         .create()
 
+    @Singleton
+    @Provides
+    fun networkStatus(app: App): INetworkStatus = NetworkStatus(app)
 }
